@@ -29,8 +29,7 @@ const SignUp = () => {
           </label>
           <input
             type="text"
-            {...register("name", {
-            })}
+            {...register("name", {})}
             className="input input-bordered w-full max-w-xs"
           />
         </div>
@@ -60,6 +59,14 @@ const SignUp = () => {
             className="input input-bordered w-full max-w-xs"
           />
         </div>
+        <label className="label">
+          {" "}
+          <span className="label-text">Select a Option</span>
+        </label>
+        <select className="select select-accent w-full max-w-xs">
+          <option>User</option>
+          <option>Seller</option>
+        </select>
         <input
           className="btn btn-accent w-full mt-4"
           value="SignUp"
