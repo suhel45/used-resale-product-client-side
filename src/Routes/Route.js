@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import DurantaAllDetails from "../components/pages/categories/DurantaAllDetails";
+import DurantaDetails from "../components/pages/categories/DurantaDetails";
 import Home from "../components/pages/Home/Home";
 import Login from "../components/pages/login/Login";
 import SignUp from "../components/pages/signUp/SignUp";
@@ -19,6 +21,11 @@ export const router = createBrowserRouter([
             {
                 path:'/home',
                 element:<Home></Home>
+            },
+            {
+                path:'/durantaDetails',
+                loader:()=>fetch('http://localhost:5000/duranta'),
+                element:<DurantaDetails></DurantaDetails>
             },
             {
                 path:'/login',
