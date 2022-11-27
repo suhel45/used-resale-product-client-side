@@ -6,19 +6,34 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../../Context/UserContext";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser,updateUserProfile } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
+    console.log(data)
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
         toast.success("user create successfully");
+
+      }).then(() => {
+        handleUpdateUserProfile(data.name);
       })
       .catch((e) => {
         console.log(e);
       });
   };
+
+
+  const handleUpdateUserProfile = (name) => {
+    const profile = {
+        displayName: name,
+    }
+  console.log(profile)
+    updateUserProfile(profile)
+        .then(() => { })
+        .catch(error => console.error(error));
+}
   return (
     <div className="h-[800px] flex justify-center items-center text-center">
       <form onSubmit={handleSubmit(onSubmit)}>

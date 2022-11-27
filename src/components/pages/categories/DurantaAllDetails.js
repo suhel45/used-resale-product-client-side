@@ -1,12 +1,25 @@
 /** @format */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import BookingModal from "../Booking/BookingModal";
 
 const DurantaAllDetails = ({ data }) => {
-  console.log(data);
+  const [clicked, setClicked] = useState(false);
+  const [bookData, setBookData] = useState({});
+
+  const saveData = () => {
+    setBookData(data);
+    setClicked(true)
+    // console.log(bookData);
+  }
+
+
+  // console.log(bookData);
+
+  // console.log(data);
   const {
+    _id,
     category,
     img,
     orginalPrice,
@@ -18,8 +31,9 @@ const DurantaAllDetails = ({ data }) => {
     location,
     phone,
   } = data;
+  // console.log(_id)
   return (
-    <div className="card card-compact  bg-base-100 shadow-xl">
+    <div className="card card-compact  bg-base-100 shadow-xl mt-10">
       <figure>
         <img src={img} alt="Shoes" />
       </figure>
@@ -48,12 +62,16 @@ const DurantaAllDetails = ({ data }) => {
           Contact: <span className="text-xl font-semibold">{phone}</span>{" "}
         </p>
         <div className="card-actions justify-end">
-          <label  htmlFor="booking-modal" className="btn btn-primary">
-            Book Now
-          </label>
+          <label  htmlFor="booking-modal" className="btn btn-primary" onClick={saveData}>
+   Book Now
+ </label>
+         
+         
         </div>
       </div>
-      <BookingModal></BookingModal>
+      {clicked && <BookingModal data={bookData} clicked={clicked} setClicked={setClicked}/>}
+      
+      
     </div>
   );
 };
