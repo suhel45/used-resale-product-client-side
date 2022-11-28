@@ -3,25 +3,30 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/UserContext";
 
 const SignUp = () => {
   const { createUser,updateUserProfile } = useContext(AuthContext);
+
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = (data,event) => {
+    event.preventDefault();
+    const option = event.target.option.value;
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         toast.success("user create successfully");
 
       }).then(() => {
         handleUpdateUserProfile(data.name);
+        saveUser(data.name,data.email,option);
       })
       .catch((e) => {
         console.log(e);
       });
+      navigate('/login')
   };
 
 
@@ -33,6 +38,24 @@ const SignUp = () => {
     updateUserProfile(profile)
         .then(() => { })
         .catch(error => console.error(error));
+}
+
+
+const saveUser = (name,email,option)=>{
+
+  const user = {
+    name,
+    email,
+   role:option
+  }
+  console.log(user);
+  fetch('http://localhost:5000/users',{
+    method:'post',
+    headers:{
+      'content-type':'application/json'
+    },
+    body:JSON.stringify(user)
+  })
 }
   return (
     <div className="h-[800px] flex justify-center items-center text-center">
@@ -78,7 +101,7 @@ const SignUp = () => {
           {" "}
           <span className="label-text">Select a Option</span>
         </label>
-        <select className="select select-accent w-full max-w-xs">
+        <select name="option" className="select select-accent w-full max-w-xs">
           <option>User</option>
           <option>Seller</option>
         </select>
