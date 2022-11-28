@@ -9,6 +9,7 @@ import AllBuyers from "../Dashboard/AllBuyers";
 import AllSellers from "../Dashboard/AllSellers";
 import Dashboard from "../Dashboard/Dashboard";
 import UserOrder from "../Dashboard/UserOrder";
+import UserProducts from "../Dashboard/UserProducts";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
 
@@ -66,7 +67,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/myproducts',
-                element:<UserOrder></UserOrder>
+                element:<UserProducts></UserProducts>
             }
         ]
     }
