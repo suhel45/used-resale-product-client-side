@@ -63,6 +63,10 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/order',
                 element:<UserOrder></UserOrder>
+            },
+            {
+                path:'/dashboard/myproducts',
+                element:<UserOrder></UserOrder>
             }
         ]
     }
