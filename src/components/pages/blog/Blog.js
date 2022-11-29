@@ -4,7 +4,7 @@ import React from "react";
 
 const Blog = () => {
   return (
-    <div className="w-[1000px] mx-auto">
+    <div className="w-[1000px] mx-auto mt-8 mb-8">
       <div>
         <h4 className="text-2xl font-bold">
           What are the different ways to manage a state in a React application?
