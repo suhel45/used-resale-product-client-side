@@ -4,6 +4,9 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
+  const option = localStorage.getItem("user");
+  const admin = localStorage.getItem('admin');
+  console.log(option);
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -18,27 +21,34 @@ const DashboardLayout = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-          <li>
-            <Link to={'/dashboard/order'}>My Orders</Link>
-          </li>
-          <li>
-            <Link to={"/dashboard/addproduct"}>Add a Product</Link>
-          </li>
-          <li>
-            <Link to={'/dashboard/myproducts'}>My Products</Link>
-          </li>
-          <li>
-            <Link>My buyers</Link>
-          </li>
-          <li>
-            <Link to={'/dashboard/sellers'} >All sellers</Link>
-          </li>
-          <li>
-            <Link to={'/dashboard/buyers'}>All buyers</Link>
-          </li>
-          <li>
-            <Link>Reported items</Link>
-          </li>
+          {option === "User" && admin==='0' &&(
+            <li>
+              <Link to={"/dashboard/order"}>My Orders</Link>
+            </li>
+          )}
+          {option === "Seller" && admin==='0' && (
+            <>
+              <li>
+                <Link to={"/dashboard/addproduct"}>Add a Product</Link>
+              </li>
+              <li>
+                <Link to={"/dashboard/myproducts"}>My Products</Link>
+              </li>
+            </>
+          )}
+          {admin === 'Admin' && (
+            <>
+              <li>
+                <Link to={"/dashboard/sellers"}>All sellers</Link>
+              </li>
+              <li>
+                <Link to={"/dashboard/buyers"}>All buyers</Link>
+              </li>
+              <li>
+                <Link>Reported items</Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>

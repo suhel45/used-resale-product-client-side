@@ -18,6 +18,7 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         toast.success("user create successfully");
+        localStorage.setItem('user',option)
 
       }).then(() => {
         handleUpdateUserProfile(data.name);

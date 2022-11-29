@@ -6,7 +6,11 @@ const AllSellers = () => {
   const [sellersdata, setSellerData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/sellers")
+    fetch("http://localhost:5000/sellers",{
+      headers:{
+        authorization:`Bearer ${localStorage.getItem('secret-token')}`
+      }
+    })
       .then((res) => res.json())
       .then((data) => setSellerData(data));
   }, [sellersdata]);

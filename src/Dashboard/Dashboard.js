@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../Context/UserContext';
 
 const Dashboard = () => {
     return (
         <div>
-            <div className="txt-4xl">dasboard</div>
         </div>
     );
 };

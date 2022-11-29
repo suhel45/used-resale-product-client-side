@@ -5,7 +5,9 @@ const AllBuyers = () => {
     useEffect(() => {
       fetch("http://localhost:5000/buyers")
         .then((res) => res.json())
-        .then((data) => setSellerData(data));
+        .then((data) => {
+          setSellerData(data)
+        });
     }, [sellersdata]);
     return (
       <div className="overflow-x-auto mt-8">
