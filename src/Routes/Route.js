@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Blog from "../components/pages/blog/Blog";
 import DurantaAllDetails from "../components/pages/categories/DurantaAllDetails";
 import DurantaDetails from "../components/pages/categories/DurantaDetails";
 import Home from "../components/pages/Home/Home";
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
             {
                 path:'/home',
                 element:<Home></Home>
+            },
+            {
+                path:'/blog',
+                element:<Blog></Blog>
             },
             {
                 path:'/durantaDetails',

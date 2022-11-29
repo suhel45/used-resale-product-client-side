@@ -3,10 +3,13 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 
 const AddProduct = () => {
   const {user} = useContext(AuthContext);
+
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     const {name,price,condition,phone,location,resale,sellerName,date,description,use} = data;
@@ -44,11 +47,10 @@ const AddProduct = () => {
           },
           body:JSON.stringify(product)
         })
-        console.log(product)
+        toast.success("Product added successfully");
+        navigate('/dashboard/myproducts')
       }
     })
-
-    toast.success("Product added successfully");
   };
   return (
     <div className="h-[1000px] w-[600px] flex justify-center items-center text-center">

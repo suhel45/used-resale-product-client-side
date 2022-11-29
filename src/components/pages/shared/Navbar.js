@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/UserContext";
 
 const Navbar = () => {
-  const { logOut,user } = useContext(AuthContext);
-  const handleLogOut = ()=>{
+  const { logOut, user } = useContext(AuthContext);
+  const handleLogOut = () => {
     logOut()
-    .then(()=>{ })
-    .catch(e=>console.log(e))
-  }
+      .then(() => {})
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div className="navbar bg-base-100">
@@ -23,18 +23,25 @@ const Navbar = () => {
             <Link to={"/home"}>Home</Link>
           </li>
           <li>
+            <Link to={"/blog"}>Blog</Link>
+          </li>
+          <li>
             <Link to={"/signup"}>SignUp</Link>
           </li>
           <li>
             <Link to={"/login"}>Login</Link>
           </li>
           <li>
-            {user?.uid && 
-             <>
-             <Link ><button onClick={handleLogOut}>LogOut</button></Link>
-             <Link to={"/dashboard"} ><button >Dashboard</button></Link>
-             </>
-            }
+            {user?.uid && (
+              <>
+                <Link>
+                  <button onClick={handleLogOut}>LogOut</button>
+                </Link>
+                <Link to={"/dashboard"}>
+                  <button>Dashboard</button>
+                </Link>
+              </>
+            )}
           </li>
         </ul>
       </div>
