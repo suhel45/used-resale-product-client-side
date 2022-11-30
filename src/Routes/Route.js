@@ -15,6 +15,7 @@ import UserOrder from "../Dashboard/UserOrder";
 import UserProducts from "../Dashboard/UserProducts";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -58,12 +59,12 @@ export const router = createBrowserRouter([
         element:<DashboardLayout></DashboardLayout>,
         children:[
             {
-                path:'*',
+                path:'/dashboard/*',
                 element:<ErrorPage></ErrorPage>
                },
             {
                 path:'/dashboard',
-                element:<Dashboard></Dashboard>
+                element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>
             },
             {
                 path:'/dashboard/addproduct',

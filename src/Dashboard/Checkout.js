@@ -3,6 +3,7 @@ import {CardElement,useStripe,useElements} from '@stripe/react-stripe-js'
 
 const Checkout = ({booking}) => {
     const [cardError,setCardError] = useState('');
+    const [success,setSuccess] = useState('');
     const stripe = useStripe();
     const elements = useElements();
     const handleSubmit = async(event)=>{
@@ -25,6 +26,7 @@ const Checkout = ({booking}) => {
             setCardError(error)
           } else {
             console.log('[PaymentMethod]', paymentMethod);
+            setSuccess(paymentMethod);
           }
     }
     return (
@@ -48,7 +50,14 @@ const Checkout = ({booking}) => {
         <button className='btn btn-primary ' type="submit" disabled={!stripe}>
           Pay
         </button>
-        <p className='text-red-500'>{cardError.message}</p>
+        {cardError &&<p className='text-red-500'>{cardError.message}</p>}
+        {success &&
+         <>
+         <p className='text-green-700'>Congrates! Payment successful</p>
+         <p className=''>Transaction id: {success.id}</p>
+         </>
+        }
+        
       </form>
     );
 };

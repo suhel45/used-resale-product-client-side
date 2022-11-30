@@ -9,6 +9,14 @@ const AllBuyers = () => {
           setSellerData(data)
         });
     }, [sellersdata]);
+    const handleDelete = (id)=>{
+    fetch(`http://localhost:5000/buyers/${id}`,{
+      method:'DELETE',
+      headers:{
+        authorization:`Bearer ${localStorage.getItem('secret-token')}`
+      }
+    })
+   }
     return (
       <div className="overflow-x-auto mt-8">
         <table className="table w-full">
@@ -26,7 +34,7 @@ const AllBuyers = () => {
                       <th>{i+1}</th>
                       <td>{data.name}</td>
                       <td>{data.email}</td>
-                      <td><button className="btn btn-sm">Delete</button></td>
+                      <td><button onClick={()=>handleDelete(data._id)}  className="btn btn-sm">Delete</button></td>
                     </tr>)
               }
           </tbody>

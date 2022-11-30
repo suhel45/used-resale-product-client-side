@@ -7,6 +7,7 @@ import { AuthContext } from "../Context/UserContext";
 const UserOrder = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
+  console.log(user)
 
   useEffect(() => {
     fetch(`http://localhost:5000/orders?email=${user?.email}`,{

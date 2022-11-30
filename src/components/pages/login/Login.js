@@ -60,11 +60,7 @@ const Login = () => {
     });
   }
   useEffect(()=>{
-      fetch('http://localhost:5000/admin',{
-          headers:{
-              authorization:`Bearer ${localStorage.getItem('secret-token')}`
-          }
-      })
+      fetch('http://localhost:5000/admin')
       .then(res=>res.json())
       .then(da=>{
           setData(da[0])

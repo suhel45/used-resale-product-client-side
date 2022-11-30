@@ -8,9 +8,10 @@ import Slider from '../slider/Slider';
 const Home = () => {
     return (
         <div>
-           <h1>home page</h1>
            <Slider></Slider>
            <Advertise></Advertise>
+           <Categories></Categories>
+           <Categories></Categories>
            <Categories></Categories>
         </div>
     );
