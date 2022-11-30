@@ -50,7 +50,7 @@ const saveUser = (name,email,option)=>{
    role:option
   }
   console.log(user);
-  fetch('http://localhost:5000/users',{
+  fetch('https://assignmet12-server-side.vercel.app/users',{
     method:'post',
     headers:{
       'content-type':'application/json'

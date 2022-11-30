@@ -20,7 +20,7 @@ const Login = () => {
       const currentUsr = {
         email: user.email,
       };
-      fetch("http://localhost:5000/jwt", {
+      fetch("https://assignmet12-server-side.vercel.app/jwt", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -44,7 +44,7 @@ const Login = () => {
       const currentUsr = {
         email: user.email,
       };
-      fetch("http://localhost:5000/jwt", {
+      fetch("https://assignmet12-server-side.vercel.app/jwt", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -62,7 +62,7 @@ const Login = () => {
     });
   }
   useEffect(()=>{
-      fetch('http://localhost:5000/admin')
+      fetch('https://assignmet12-server-side.vercel.app/admin')
       .then(res=>res.json())
       .then(da=>{
           setData(da[0])

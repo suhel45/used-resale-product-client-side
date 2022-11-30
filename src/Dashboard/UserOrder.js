@@ -10,7 +10,7 @@ const UserOrder = () => {
   console.log(user)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders?email=${user?.email}`,{
+    fetch(`https://assignmet12-server-side.vercel.app/orders?email=${user?.email}`,{
       headers:{
         authorization:`Bearer ${localStorage.getItem('secret-token')}`
       }

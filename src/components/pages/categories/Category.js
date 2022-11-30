@@ -5,7 +5,7 @@ const Category = () => {
     const [data,setData] = useState([]);
 
     useEffect(()=>{
-        fetch('http://localhost:5000/duranta')
+        fetch('https://assignmet12-server-side.vercel.app/duranta')
         .then(res=>res.json())
         .then(da=>setData(da))
     },[])

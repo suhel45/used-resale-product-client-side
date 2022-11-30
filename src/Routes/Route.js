@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/durantaDetails',
-                loader:()=>fetch('http://localhost:5000/duranta'),
+                loader:()=>fetch('https://assignmet12-server-side.vercel.app/duranta'),
                 element:<DurantaDetails></DurantaDetails>
             },
             {
@@ -89,7 +89,7 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/payment/:id',
                 element:<Payment></Payment>,
-                loader:({params})=>fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader:({params})=>fetch(`https://assignmet12-server-side.vercel.app/bookings/${params.id}`)
             }
         ]
     }

@@ -13,7 +13,7 @@ const BookingModal = ({data, clicked, setClicked}) => {
     console.log(data);
 
     // useEffect(() => {
-      // fetch(`http://localhost:5000/duranta/${_id}`).then((res) => {
+      // fetch(`https://assignmet12-server-side.vercel.app/duranta/${_id}`).then((res) => {
         // return res.json()
       // }).then((data) => {
         // console.log(data);
@@ -39,7 +39,7 @@ const BookingModal = ({data, clicked, setClicked}) => {
             location
         }
         
-          fetch("http://localhost:5000/bookings",{
+          fetch("https://assignmet12-server-side.vercel.app/bookings",{
             method:'post',
             headers:{
               'content-type':'application/json'

@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react';
 const AllBuyers = () => {
     const [sellersdata, setSellerData] = useState([]);
     useEffect(() => {
-      fetch("http://localhost:5000/buyers")
+      fetch("https://assignmet12-server-side.vercel.app/buyers")
         .then((res) => res.json())
         .then((data) => {
           setSellerData(data)
         });
     }, [sellersdata]);
     const handleDelete = (id)=>{
-    fetch(`http://localhost:5000/buyers/${id}`,{
+    fetch(`https://assignmet12-server-side.vercel.app/buyers/${id}`,{
       method:'DELETE',
       headers:{
         authorization:`Bearer ${localStorage.getItem('secret-token')}`

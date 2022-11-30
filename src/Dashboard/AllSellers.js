@@ -6,7 +6,7 @@ const AllSellers = () => {
   const [sellersdata, setSellerData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/sellers",{
+    fetch("https://assignmet12-server-side.vercel.app/sellers",{
       headers:{
         authorization:`Bearer ${localStorage.getItem('secret-token')}`
       }
@@ -16,7 +16,7 @@ const AllSellers = () => {
   }, [sellersdata]);
 
   const handleDelete = (id)=>{
-  fetch(`http://localhost:5000/sellers/${id}`,{
+  fetch(`https://assignmet12-server-side.vercel.app/sellers/${id}`,{
     method:'DELETE',
     headers:{
       authorization:`Bearer ${localStorage.getItem('secret-token')}`

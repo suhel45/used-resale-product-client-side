@@ -40,7 +40,7 @@ const AddProduct = () => {
           description,
           use
         }
-        fetch('http://localhost:5000/products',{
+        fetch('https://assignmet12-server-side.vercel.app/products',{
           method:"post",
           headers:{
             'content-type':'application/json'
