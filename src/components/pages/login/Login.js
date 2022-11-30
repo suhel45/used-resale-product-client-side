@@ -3,13 +3,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/UserContext";
 
 const Login = () => {
   const [data,setData] = useState([]);
-  const { user,signIn,userLogin } = useContext(AuthContext);
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/';
+  const { user,signIn,userLogin } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     signIn(data.email, data.password)

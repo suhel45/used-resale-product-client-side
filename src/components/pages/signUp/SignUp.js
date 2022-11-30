@@ -23,11 +23,11 @@ const SignUp = () => {
       }).then(() => {
         handleUpdateUserProfile(data.name);
         saveUser(data.name,data.email,option);
+        navigate('/login')
       })
       .catch((e) => {
         console.log(e);
       });
-      navigate('/login')
   };
 
 
