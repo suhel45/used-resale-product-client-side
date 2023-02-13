@@ -53,7 +53,7 @@ const AddProduct = () => {
     })
   };
   return (
-    <div className="h-[1000px] w-[600px] flex justify-center items-center text-center">
+    <div className="h-[1000px] lg:w-[500px] sm:w-[400px] md:w-[300px] flex justify-center items-center text-center shadow-2xl bg-white mx-auto mt-5 mb-8 rounded-xl">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control w-full max-w-xs">
           <label className="label">

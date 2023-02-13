@@ -4,8 +4,8 @@ import DurantaCategory from './DurantaCategory';
 const Categories = () => {
     return (
         <div>
-            <div className='w-3/4 mx-auto flex justify-start'>
-                <h1 className='text-3xl'>All Categories</h1>
+            <div className='mb-5 flex justify-center'>
+                <h1 className='text-4xl font-bold'>All Categories</h1>
             </div>
            <DurantaCategory></DurantaCategory>
         </div>

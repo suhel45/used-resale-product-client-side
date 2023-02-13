@@ -36,6 +36,7 @@ const Login = () => {
     .catch((e) => {
       console.log(e);
     });
+    navigate('/durantaDetails')
   };
   const handleGoogle = ()=>{
     userLogin()
@@ -75,7 +76,7 @@ const Login = () => {
   localStorage.setItem('admin',0);
  }
   return (
-    <div className="h-[800px] flex justify-center items-center text-center">
+    <div className=" max-h-full mt-8 max-w-xs  flex justify-center items-center text-center card w-96 bg-base-100 mb-8 mx-auto  shadow-xl">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control w-full max-w-xs">
           <label className="label">
@@ -100,13 +101,13 @@ const Login = () => {
           />
         </div>
         <input
-          className="btn btn-accent w-full mt-4"
+          className="btn bg-[#eab308] w-full mt-4"
           value="login"
           type="submit"
         />
         <div className="divider">OR</div>
         <Link>
-        <button onClick={handleGoogle}  className="btn btn-outline w-full mt-4">Continue With Google</button>
+        <button onClick={handleGoogle}  className="btn btn-outline w-full mt-4 mb-8">Continue With Google</button>
         </Link>
       </form>
     </div>

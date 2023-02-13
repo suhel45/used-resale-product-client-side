@@ -68,19 +68,18 @@ const BookingModal = ({data, clicked, setClicked}) => {
             className="btn btn-sm btn-circle absolute right-2 top-2" onClick={() => setClicked(false)}>
             ✕
           </label>
-                    <form onSubmit={handleBooking}  className='grid grid-cols-1 gap-3 mt-10'>
+                    <form onSubmit={handleBooking}  className='grid grid-cols-1  gap-3 mt-10'>
                         <input name="category" type="text" disabled defaultValue={category}
                         className="input w-full input-bordered " />
                         <input name="price" type="text" disabled defaultValue={resalePrice} className="input w-full input-bordered " />
                         <input name="name" type="text" defaultValue={user?.displayName} disabled placeholder="Your Name" className="input w-full input-bordered" />
                         <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input w-full input-bordered" />
-                        <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" />
-                        <input name="location" type="text" placeholder="Your location" className="input w-full input-bordered" />
+                        <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" required/>
+                        <input name="location" type="text" placeholder="Your location" className="input w-full input-bordered " required />
                         <br />
-                        <input className='btn btn-accent w-full' type="submit" value="Submit" />
+                        <input className='btn btn-primary w-full' type="submit" value="Submit" />
                     </form>
         </div>
-        {/* <p>{data.category}</p> */}
       </div>
     </>
   );

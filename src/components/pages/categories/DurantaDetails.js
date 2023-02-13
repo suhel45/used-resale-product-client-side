@@ -7,9 +7,8 @@ import DurantaAllDetails from "./DurantaAllDetails";
 const DurantaDetails = () => {
   const datas = useLoaderData();
   return (
-    <div>
-         <div className="text-2xl">Duranta Bi-Cycle</div>
-      <div className="w-3/4 mx-auto grid grid-cols-2 gap-5">
+    <div className="mt-10">
+      <div className=" grid lg:grid-cols md:grid-cols  mt-8  md:w-full">
         {datas.map((data) => (
           <DurantaAllDetails key={data._id} data={data}/>
         ))}

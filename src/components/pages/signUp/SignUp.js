@@ -3,7 +3,7 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/UserContext";
 
 const SignUp = () => {
@@ -59,7 +59,8 @@ const saveUser = (name,email,option)=>{
   })
 }
   return (
-    <div className="h-[800px] flex justify-center items-center text-center">
+    <div className=" max-h-full mt-8 max-w-xs  flex justify-center items-center text-center card w-96 bg-base-100 mb-8 
+mx-auto  shadow-xl">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control w-full max-w-xs">
           <label className="label">
@@ -70,6 +71,8 @@ const saveUser = (name,email,option)=>{
             type="text"
             {...register("name", {})}
             className="input input-bordered w-full max-w-xs"
+            placeholder="Your Name"
+            required
           />
         </div>
         <div className="form-control w-full max-w-xs">
@@ -83,12 +86,13 @@ const saveUser = (name,email,option)=>{
               required: "Email Address is required",
             })}
             className="input input-bordered w-full max-w-xs"
+            placeholder="Your Email"
           />
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
             {" "}
-            <span className="label-text">password</span>
+            <span className="label-text">Password</span>
           </label>
           <input
             type="password"
@@ -96,6 +100,7 @@ const saveUser = (name,email,option)=>{
               required: "password is required",
             })}
             className="input input-bordered w-full max-w-xs"
+            placeholder="Your Password"
           />
         </div>
         <label className="label">
@@ -106,8 +111,9 @@ const saveUser = (name,email,option)=>{
           <option>User</option>
           <option>Seller</option>
         </select>
+        <p><small>Already have an account please <Link className="text-success" to={"/login"}>login</Link> </small></p>
         <input
-          className="btn btn-accent w-full mt-4"
+          className="btn bg-[#eab308] w-full mt-4 mb-8"
           value="SignUp"
           type="submit"
         />

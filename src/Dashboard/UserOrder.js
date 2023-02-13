@@ -7,8 +7,7 @@ import { AuthContext } from "../Context/UserContext";
 const UserOrder = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
-  console.log(user)
-
+  console.log(user?.email,orders,user)
   useEffect(() => {
     fetch(`https://assignmet12-server-side.vercel.app/orders?email=${user?.email}`,{
       headers:{
@@ -34,7 +33,7 @@ const UserOrder = () => {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order, i) => (
+          {orders?.map((order, i) => (
             <tr key={order._id}>
               <th>{i + 1}</th>
               <td>{order.category}</td>

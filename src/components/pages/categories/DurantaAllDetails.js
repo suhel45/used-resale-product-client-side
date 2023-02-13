@@ -1,19 +1,22 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useLoaderData } from "react-router-dom";
+import UserContext, { AuthContext } from "../../../Context/UserContext";
 import BookingModal from "../Booking/BookingModal";
 
 const DurantaAllDetails = ({ data }) => {
+  const {user} = useContext(AuthContext);
+  console.log(user);
   const [clicked, setClicked] = useState(false);
   const [bookData, setBookData] = useState({});
 
   const saveData = () => {
     setBookData(data);
-    setClicked(true)
+    setClicked(true);
     // console.log(bookData);
-  }
-
+  };
 
   // console.log(bookData);
 
@@ -33,45 +36,50 @@ const DurantaAllDetails = ({ data }) => {
   } = data;
   // console.log(_id)
   return (
-    <div className="card card-compact  bg-base-100 shadow-xl mt-10">
+    <div className="card lg:card-side md:card-side bg-base-100 shadow-xl mb-8 lg:w-3/4 lg:mx-auto md:w-3/4 md:mx-auto">
       <figure>
-        <img src={img} alt="Shoes" />
+        <img
+          className="lg:h-full lg:w-full md:max-h-full md:max-w-full mx-10  sm:mx-5 "
+          src={img}
+          alt="Movie"
+        />
       </figure>
-      <div className="card-body items-center text-center">
-        <h2 className="card-title">{category}</h2>
-        <div className="flex justify-items-center items-center">
-          <p>Orginal Price: </p>
-          <h4 className="text-xl font-semibold">${orginalPrice}</h4>
-        </div>
-        <div className="flex justify-items-center items-center">
-          <p>Condition: </p>
-          <h4 className="text-xl font-semibold">{condition}</h4>
-        </div>
-        <p>{descriptin}</p>
-        <p>
-          Used: <span className="text-xl font-semibold">{use}years</span>{" "}
-        </p>
-        <p>
-          ResalePrice:{" "}
-          <span className="text-xl font-semibold">${resalePrice}</span>{" "}
-        </p>
-        <p>
-          Location: <span className="text-xl font-semibold">{location}</span>{" "}
-        </p>
-        <p>
-          Contact: <span className="text-xl font-semibold">{phone}</span>{" "}
-        </p>
-        <div className="card-actions justify-end">
-          <label  htmlFor="booking-modal" className="btn btn-primary" onClick={saveData}>
-   Book Now
- </label>
-         
-         
+      <div className="card-body ">
+        <div className="mx-10 sm:mx-10">
+          <h2 className="text-3xl font-bold">{category}</h2>
+          <p>
+            <span className="text-xl font-bold">Price:</span> {resalePrice}$
+          </p>
+          <p>
+            <span className="text-xl font-bold">Regular Price:</span>
+            <del>{orginalPrice}$</del>
+          </p>
+          <p>
+            <span className="text-xl font-bold">Qulity:</span> {condition}
+          </p>
+          <p>
+            <span className="text-xl font-bold">Used:</span> {use} Years
+          </p>
+          <p>
+            <span className="text-xl font-bold">Location:</span> {location}{" "}
+          </p>
+          <p>
+            <span className="text-xl font-bold">Contact:</span> {phone}{" "}
+          </p>
+          <p>
+            <span className="text-xl font-bold">Post on:</span> {date}{" "}
+          </p>
+         {user?.email ?
+         <>
+          <label htmlFor="booking-modal"  onClick={saveData} className="btn btn-primary }
+{md:mb-14">Book now</label>
+         </>
+         :
+         <><Link className="btn btn-primary" to={"/login"}>Book Now</Link></>
+          }
         </div>
       </div>
       {clicked && <BookingModal data={bookData} clicked={clicked} setClicked={setClicked}/>}
-      
-      
     </div>
   );
 };

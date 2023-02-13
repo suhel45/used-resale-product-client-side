@@ -27,23 +27,23 @@ const AllSellers = () => {
 
 
   return (
-    <div className="overflow-x-auto mt-8">
-      <table className="table w-full">
+    <div className="overflow-x-auto ">
+      <table className="table max-w-full mx-auto">
         <thead>
           <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Action</th>
+            <th className="text-sm"></th>
+            <th className="text-sm">Name</th>
+            <th className="text-sm">Email</th>
+            <th className="text-sm">Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
             {
                 sellersdata.map((data,i)=><tr key={data._id}>
-                    <th>{i+1}</th>
-                    <td>{data.name}</td>
-                    <td>{data.email}</td>
-                    <td><button onClick={()=>handleDelete(data._id)} className="btn btn-sm">Delete</button></td>
+                    <th className="text-sm">{i+1}</th>
+                    <td className="text-sm">{data.name}</td>
+                    <td className="text-sm">{data.email}</td>
+                    <td className="text-sm"><button onClick={()=>handleDelete(data._id)} className="btn btn-sm">Delete</button></td>
                   </tr>)
             }
         </tbody>

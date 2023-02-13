@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Blog from "../components/pages/blog/Blog";
 import DurantaAllDetails from "../components/pages/categories/DurantaAllDetails";
 import DurantaDetails from "../components/pages/categories/DurantaDetails";
+import HeroDetails from "../components/pages/categories/HeroDetails";
+import PhoenixDetails from "../components/pages/categories/PhoenixDetails";
 import ErrorPage from "../components/pages/errorPage/ErrorPage";
 import Home from "../components/pages/Home/Home";
 import Login from "../components/pages/login/Login";
@@ -42,6 +44,16 @@ export const router = createBrowserRouter([
                 path:'/durantaDetails',
                 loader:()=>fetch('https://assignmet12-server-side.vercel.app/duranta'),
                 element:<DurantaDetails></DurantaDetails>
+            },
+            {
+                path:'/heroDetails',
+                loader:()=>fetch('https://assignmet12-server-side.vercel.app/Hero'),
+                element:<HeroDetails></HeroDetails>
+            },
+            {
+                path:'/phoenixDetails',
+                loader:()=>fetch('https://assignmet12-server-side.vercel.app/Phoenix'),
+                element:<PhoenixDetails></PhoenixDetails>
             },
             {
                 path:'/login',
