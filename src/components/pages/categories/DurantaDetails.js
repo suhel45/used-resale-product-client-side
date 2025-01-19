@@ -8,9 +8,9 @@ const DurantaDetails = () => {
   const datas = useLoaderData();
   return (
     <div className="mt-10">
-      <div className=" grid lg:grid-cols md:grid-cols  mt-8  md:w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {datas.map((data) => (
-          <DurantaAllDetails key={data._id} data={data}/>
+          <DurantaAllDetails key={data._id} data={data} />
         ))}
       </div>
     </div>

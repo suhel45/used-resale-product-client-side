@@ -7,13 +7,16 @@ import { AuthContext } from "../Context/UserContext";
 const UserOrder = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
-  console.log(user?.email,orders,user)
+  console.log(user?.email, orders, user);
   useEffect(() => {
-    fetch(`https://assignmet12-server-side.vercel.app/orders?email=${user?.email}`,{
-      headers:{
-        authorization:`Bearer ${localStorage.getItem('secret-token')}`
+    fetch(
+      `https://assignmet12-server-side.vercel.app/orders?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("secret-token")}`,
+        },
       }
-    })
+    )
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
@@ -41,16 +44,14 @@ const UserOrder = () => {
               <td>{order.location}</td>
               <td>{order.phone}</td>
               <td>
-                {
-                  order.price && !order.paid && 
+                {order.price && !order.paid && (
                   <Link to={`/dashboard/payment/${order._id}`}>
                     <button className="btn btn-primary btn-xs">pay</button>
-                    </Link>
-                }
-                {
-                  order.price && order.paid &&
+                  </Link>
+                )}
+                {order.price && order.paid && (
                   <span className="btn btn-secondary btn-xs">paid</span>
-                }
+                )}
               </td>
             </tr>
           ))}

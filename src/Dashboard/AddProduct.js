@@ -7,50 +7,61 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 
 const AddProduct = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    const {name,price,condition,phone,location,resale,sellerName,date,description,use} = data;
+    const {
+      name,
+      price,
+      condition,
+      phone,
+      location,
+      resale,
+      sellerName,
+      date,
+      description,
+      use,
+    } = data;
     const imgKey = process.env.REACT_APP_imgbb_key;
     const image = data.photo[0];
     const formData = new FormData();
-    formData.append('image',image);
-    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgKey}`
-    fetch(url,{
-      method:'post',
-      body:formData
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgKey}`;
+    fetch(url, {
+      method: "post",
+      body: formData,
     })
-    .then(res=>res.json())
-    .then(imgData=>{
-      if(imgData.success){
-        console.log(imgData.data.url);
-        const product = {
-          email:user?.email,
-          image:imgData.data.url,
-          name,
-          price,
-          condition,
-          phone,
-          location,
-          resale,
-          sellerName,
-          date,
-          description,
-          use
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          console.log(imgData.data.url);
+          const product = {
+            email: user?.email,
+            img: imgData.data.url,
+            category: name,
+            orginalPrice: price,
+            condition,
+            phone,
+            location,
+            resalePrice: resale,
+            sellerName,
+            date,
+            description,
+            use,
+          };
+          fetch("https://assignmet12-server-side.vercel.app/products", {
+            method: "post",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(product),
+          });
+          toast.success("Product added successfully");
+          navigate("/dashboard/myproducts");
         }
-        fetch('https://assignmet12-server-side.vercel.app/products',{
-          method:"post",
-          headers:{
-            'content-type':'application/json'
-          },
-          body:JSON.stringify(product)
-        })
-        toast.success("Product added successfully");
-        navigate('/dashboard/myproducts')
-      }
-    })
+      });
   };
   return (
     <div className="h-[1000px] lg:w-[500px] sm:w-[400px] md:w-[300px] flex justify-center items-center text-center shadow-2xl bg-white mx-auto mt-5 mb-8 rounded-xl">
@@ -64,6 +75,7 @@ const AddProduct = () => {
             type="file"
             {...register("photo", {})}
             className="input input-bordered w-full max-w-xs"
+            required
           />
         </div>
         <div className="form-control w-full max-w-xs">
@@ -75,6 +87,7 @@ const AddProduct = () => {
             type="text"
             {...register("name", {})}
             className="input input-bordered w-full max-w-xs"
+            required
           />
         </div>
         <div className="form-control w-full max-w-xs">
@@ -86,6 +99,7 @@ const AddProduct = () => {
             type="text"
             {...register("price", {})}
             className="input input-bordered w-full max-w-xs"
+            required
           />
         </div>
         <div className="form-control w-full max-w-xs">

@@ -7,79 +7,82 @@ import UserContext, { AuthContext } from "../../../Context/UserContext";
 import BookingModal from "../Booking/BookingModal";
 
 const DurantaAllDetails = ({ data }) => {
-  const {user} = useContext(AuthContext);
-  console.log(user);
+  const { user } = useContext(AuthContext);
   const [clicked, setClicked] = useState(false);
   const [bookData, setBookData] = useState({});
 
-  const saveData = () => {
+  const saveData = (data) => {
     setBookData(data);
     setClicked(true);
-    // console.log(bookData);
   };
-
-  // console.log(bookData);
-
-  // console.log(data);
   const {
     _id,
     category,
     img,
     orginalPrice,
     condition,
-    descriptin,
     resalePrice,
     use,
     date,
     location,
     phone,
   } = data;
-  // console.log(_id)
   return (
-    <div className="card lg:card-side md:card-side bg-base-100 shadow-xl mb-8 lg:w-3/4 lg:mx-auto md:w-3/4 md:mx-auto">
-      <figure>
-        <img
-          className="lg:h-full lg:w-full md:max-h-full md:max-w-full mx-10  sm:mx-5 "
-          src={img}
-          alt="Movie"
-        />
-      </figure>
-      <div className="card-body ">
-        <div className="mx-10 sm:mx-10">
-          <h2 className="text-3xl font-bold">{category}</h2>
-          <p>
-            <span className="text-xl font-bold">Price:</span> {resalePrice}$
-          </p>
-          <p>
-            <span className="text-xl font-bold">Regular Price:</span>
-            <del>{orginalPrice}$</del>
-          </p>
-          <p>
-            <span className="text-xl font-bold">Qulity:</span> {condition}
-          </p>
-          <p>
-            <span className="text-xl font-bold">Used:</span> {use} Years
-          </p>
-          <p>
-            <span className="text-xl font-bold">Location:</span> {location}{" "}
-          </p>
-          <p>
-            <span className="text-xl font-bold">Contact:</span> {phone}{" "}
-          </p>
-          <p>
-            <span className="text-xl font-bold">Post on:</span> {date}{" "}
-          </p>
-         {user?.email ?
-         <>
-          <label htmlFor="booking-modal"  onClick={saveData} className="btn btn-primary }
-{md:mb-14">Book now</label>
-         </>
-         :
-         <><Link className="btn btn-primary" to={"/login"}>Book Now</Link></>
-          }
+    <div>
+      <div
+        key={_id}
+        className="card bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+        <figure className="h-48 w-full ">
+          <img className="h-full w-full object-cover" src={img} alt="Item" />
+        </figure>
+        <div className="card-body p-6">
+          <div className="space-y-3">
+            <h2 className="text-xl font-bold text-gray-800">{category}</h2>
+            <div>
+              <span className="font-semibold text-gray-600">Price:</span>{" "}
+              <span className="text-green-600 font-bold">{resalePrice}$</span>
+            </div>
+            <div>
+              <span className="font-semibold text-gray-600">
+                Regular Price:
+              </span>{" "}
+              <del className="text-red-500">{orginalPrice}$</del>
+            </div>
+            <div>
+              <span className="font-semibold text-gray-600">Quality:</span>{" "}
+              {condition}
+            </div>
+            <div>
+              <span className="font-semibold text-gray-600">Location:</span>{" "}
+              {location}
+            </div>
+          </div>
+          <div className="mt-6">
+            {user?.email ? (
+              <label
+                htmlFor="booking-modal"
+                onClick={() => saveData(data)}
+                className="btn btn-primary w-full py-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600 transition duration-200">
+                Book Now
+              </label>
+            ) : (
+              <Link
+                className="btn btn-primary w-full py-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600 transition duration-200"
+                to="/login">
+                Book Now
+              </Link>
+            )}
+          </div>
         </div>
       </div>
-      {clicked && <BookingModal data={bookData} clicked={clicked} setClicked={setClicked}/>}
+
+      {clicked && (
+        <BookingModal
+          data={bookData}
+          clicked={clicked}
+          setClicked={setClicked}
+        />
+      )}
     </div>
   );
 };

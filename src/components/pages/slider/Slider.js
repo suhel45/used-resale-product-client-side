@@ -25,12 +25,13 @@ const Slider = () => {
             <span className="text-primary">sell</span> your product
           </h1>
           <p className="py-4 ">
-          Excellent platform to buy and sell second hand goods. It is easy to buy and sell various category product at low budget.
+            Excellent platform to buy and sell second hand goods. It is easy to
+            buy and sell various category product at low budget.
           </p>
           <div className="flex justify-center mt-3">
-          <Link to={'/durantaDetails'}>
-          <button className="btn btn-primary px-5">Buy Now</button>
-          </Link>
+            <Link to={"/durantaDetails"}>
+              <button className="btn btn-primary px-5">Buy Now</button>
+            </Link>
           </div>
         </div>
       </div>
