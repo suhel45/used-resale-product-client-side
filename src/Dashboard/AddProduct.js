@@ -8,9 +8,9 @@ import { AuthContext } from "../Context/UserContext";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
-
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
+
   const onSubmit = (data) => {
     const {
       name,
@@ -24,10 +24,12 @@ const AddProduct = () => {
       description,
       use,
     } = data;
+
     const imgKey = process.env.REACT_APP_imgbb_key;
     const image = data.photo[0];
     const formData = new FormData();
     formData.append("image", image);
+
     const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgKey}`;
     fetch(url, {
       method: "post",
@@ -36,7 +38,6 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          console.log(imgData.data.url);
           const product = {
             email: user?.email,
             img: imgData.data.url,
@@ -51,6 +52,7 @@ const AddProduct = () => {
             description,
             use,
           };
+
           fetch("https://assignmet12-server-side.vercel.app/products", {
             method: "post",
             headers: {
@@ -58,162 +60,141 @@ const AddProduct = () => {
             },
             body: JSON.stringify(product),
           });
+
           toast.success("Product added successfully");
           navigate("/dashboard/myproducts");
         }
       });
   };
+
   return (
-    <div className="h-[1000px] lg:w-[500px] sm:w-[400px] md:w-[300px] flex justify-center items-center text-center shadow-2xl bg-white mx-auto mt-5 mb-8 rounded-xl">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">Photo</span>
-          </label>
+    <div className="max-w-lg w-full mx-auto bg-white p-6 rounded-xl shadow-xl mt-8 mb-8 max-h-screen overflow-y-auto">
+      <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+        Add a New Product
+      </h2>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* File Upload */}
+        <div className="flex flex-col">
+          <label className="font-medium">Product Image</label>
           <input
             type="file"
             {...register("photo", {})}
-            className="input input-bordered w-full max-w-xs"
+            className="file-input file-input-bordered w-full mt-2"
             required
           />
         </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">Product Name</span>
-          </label>
+
+        {/* Product Name */}
+        <div className="flex flex-col">
+          <label className="font-medium">Product Name</label>
           <input
             type="text"
             {...register("name", {})}
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full mt-2"
             required
           />
         </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">Orginal Price</span>
-          </label>
-          <input
-            type="text"
-            {...register("price", {})}
-            className="input input-bordered w-full max-w-xs"
-            required
-          />
+
+        {/* Price & Condition */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col">
+            <label className="font-medium">Original Price</label>
+            <input
+              type="text"
+              {...register("price", {})}
+              className="input input-bordered w-full mt-2"
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="font-medium">Condition</label>
+            <select
+              {...register("condition", { required: "Condition is required" })}
+              className="select select-bordered w-full mt-2">
+              <option value="Excellent">Excellent</option>
+              <option value="Good">Good</option>
+              <option value="Fair">Fair</option>
+            </select>
+          </div>
         </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">
-              condition type(excellent, good, fair)
-            </span>
-          </label>
-          <input
-            type="text"
-            {...register("condition", {
-              required: "condition is required",
-            })}
-            className="input input-bordered w-full max-w-xs"
-          />
+
+        {/* Phone & Location */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col">
+            <label className="font-medium">Mobile Phone</label>
+            <input
+              type="text"
+              {...register("phone", { required: "Phone is required" })}
+              className="input input-bordered w-full mt-2"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="font-medium">Location</label>
+            <input
+              type="text"
+              {...register("location", { required: "Location is required" })}
+              className="input input-bordered w-full mt-2"
+            />
+          </div>
         </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">Mobile Phone</span>
-          </label>
-          <input
-            type="text"
-            {...register("phone", {
-              required: "Mobile phone is required",
-            })}
-            className="input input-bordered w-full max-w-xs"
-          />
-        </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">Location</span>
-          </label>
-          <input
-            type="text"
-            {...register("location", {
-              required: "location is required",
-            })}
-            className="input input-bordered w-full max-w-xs"
-          />
-        </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">description</span>
-          </label>
-          <input
-            type="text"
+
+        {/* Description */}
+        <div className="flex flex-col">
+          <label className="font-medium">Description</label>
+          <textarea
             {...register("description", {
-              required: "description is required",
+              required: "Description is required",
             })}
-            className="input input-bordered w-full max-w-xs"
-          />
+            className="textarea textarea-bordered w-full mt-2"
+            rows="3"></textarea>
         </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">Resale Price</span>
-          </label>
-          <input
-            type="text"
-            {...register("resale", {
-              required: "Resal price is required",
-            })}
-            className="input input-bordered w-full max-w-xs"
-          />
+
+        {/* Resale Price & Usage Years */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col">
+            <label className="font-medium">Resale Price</label>
+            <input
+              type="text"
+              {...register("resale", { required: "Resale price is required" })}
+              className="input input-bordered w-full mt-2"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="font-medium">Years of Use</label>
+            <input
+              type="text"
+              {...register("use", { required: "Usage duration is required" })}
+              className="input input-bordered w-full mt-2"
+            />
+          </div>
         </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">Years of use</span>
-          </label>
-          <input
-            type="text"
-            {...register("use", {
-              required: "Years of use is required",
-            })}
-            className="input input-bordered w-full max-w-xs"
-          />
+
+        {/* Seller Name & Date */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col">
+            <label className="font-medium">Seller Name</label>
+            <input
+              type="text"
+              {...register("sellerName", {
+                required: "Seller name is required",
+              })}
+              className="input input-bordered w-full mt-2"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="font-medium">Date</label>
+            <input
+              type="text"
+              defaultValue={Date()}
+              {...register("date", { required: "Date is required" })}
+              className="input input-bordered w-full mt-2"
+            />
+          </div>
         </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">Seller Name</span>
-          </label>
-          <input
-            type="text"
-            {...register("sellerName", {
-              required: "Seller name is required",
-            })}
-            className="input input-bordered w-full max-w-xs"
-          />
-        </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            {" "}
-            <span className="label-text">Date</span>
-          </label>
-          <input
-            type="text"
-            defaultValue={Date()}
-            {...register("date", {
-              required: "condition is required",
-            })}
-            className="input input-bordered w-full max-w-xs"
-          />
-        </div>
-        <input
-          className="btn btn-accent w-full mt-4"
-          value="Add Product"
-          type="submit"
-        />
+
+        {/* Submit Button */}
+        <button className="btn btn-primary w-full mt-4">Add Product</button>
       </form>
     </div>
   );

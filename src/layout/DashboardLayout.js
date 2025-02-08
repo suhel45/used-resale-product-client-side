@@ -1,18 +1,20 @@
 /** @format */
 
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Header from "../components/pages/shared/Header";
-import Navbar from "../components/pages/shared/Navbar";
+import UseAdmin from "../components/Hooks/UseAdmin";
+import { AuthContext } from "../Context/UserContext";
 
 const DashboardLayout = () => {
-  const option = localStorage.getItem("user");
-  const admin = localStorage.getItem("admin");
-  console.log(option);
+  const {user} = useContext(AuthContext);
+    const data = UseAdmin();
+    let isRole = false;
+    isRole = data;
   return (
     <div>
-      <Header></Header>
-      <div className="drawer drawer-mobile">
+      <Header ></Header>
+      {user &&(<div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex ">
           <Outlet></Outlet>
@@ -20,12 +22,12 @@ const DashboardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-            {option === "User" && admin === "0" && (
+            {isRole === "User" && (
               <li>
                 <Link to={"/dashboard/order"}>My Orders</Link>
               </li>
             )}
-            {option === "Seller" && admin === "0" && (
+            {isRole === "Seller"  && (
               <>
                 <li>
                   <Link to={"/dashboard/addproduct"}>Add a Product</Link>
@@ -35,7 +37,7 @@ const DashboardLayout = () => {
                 </li>
               </>
             )}
-            {admin === "Admin" && (
+            {isRole==='Admin' && (
               <>
                 <li>
                   <Link to={"/dashboard/sellers"}>All sellers</Link>
@@ -50,7 +52,7 @@ const DashboardLayout = () => {
             )}
           </ul>
         </div>
-      </div>
+      </div>)}
     </div>
   );
 };

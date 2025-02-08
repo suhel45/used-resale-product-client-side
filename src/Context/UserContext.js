@@ -18,8 +18,8 @@ const auth = getAuth(app);
 const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const provider = new GoogleAuthProvider();
+  
   const userLogin = () => {
     setLoading(false);
     return signInWithPopup(auth, provider);
@@ -29,14 +29,17 @@ const UserContext = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
   };
+
   const updateUserProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);
   };
@@ -47,22 +50,17 @@ const UserContext = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
-  useEffect(() => {
-    fetch("https://assignmet12-server-side.vercel.app/admin")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
+
+
   const authInfo = {
     createUser,
     signIn,
     logOut,
     userLogin,
     user,
+    loading,
     updateUserProfile,
   };
   return (
